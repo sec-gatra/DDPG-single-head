@@ -69,7 +69,7 @@ class GameState:
         penalty_power   = 1 * power_violation
 
         # Reward: throughput minus penalties
-        =reward = total_rate - penalty_rate - penalty_power
+        reward = total_rate - penalty_rate - penalty_power
         
         # Condition 1: Budget exceeded
         fail_power = total_daya > self.p_max
