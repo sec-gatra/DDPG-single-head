@@ -128,6 +128,7 @@ def main():
             if lr_steps==sepertiga_eps :
                 opt.a_lr=0.3 * opt.a_lr
                 opt.c_lr=0.3 * opt.c_lr
+                opt.noise=opt.noise-0.1
                 lr_steps=0
             loc= env.generate_positions() #lokasi untuk s_t
             channel_gain=env.generate_channel_gain(loc) #channel gain untuk s_t
