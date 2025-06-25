@@ -55,6 +55,21 @@ class GameState:
         EE=self.hitung_efisiensi_energi(power,data_rate)
         
         total_daya=np.sum(power)
+        total_rate  = np.sum(data_rate)
+        
+        # Condition 1: Budget exceeded
+        fail_power = total_daya > self.p_max
+
+        rate_violation = np.sum(np.maximum(0.048 - data_rate, 0.0))
+        penalty_rate   = 5 * rate_violation
+    
+
+        # 2) Power violation: only when total_power > p_max
+        power_violation = max(0.0, total_daya - self.p_max)
+        penalty_power   = 0.05 * power_violation
+
+        # Reward: throughput minus penalties
+        reward = total_rate - penalty_rate - penalty_power
         
         # Condition 1: Budget exceeded
         fail_power = total_daya > self.p_max
@@ -101,7 +116,7 @@ class GameState:
         'total_power': float(np.sum(power))
         }
 
-        reward = -np.sum(data_rate_constraint) + EE - 5*self.step_function(total_daya-self.p_max)
+        #reward = -np.sum(data_rate_constraint) + EE - 5*self.step_function(total_daya-self.p_max)
         obs = np.concatenate([self.norm(next_channel_gain).ravel(),self.norm(next_intr).ravel(),self.norm(power)])
         return obs.astype(np.float32), float(reward), dw,False, info
     def norm(self,x):
@@ -170,7 +185,7 @@ class GameState:
     #            else:
     #                channel_gain[i][j] = np.random.rayleigh(scale=1)
     #    return channel_gain
-    def generate_channel_gain(self,dist, sigma_shadow_dB=2.0, frek = 6):
+    def generate_channel_gain(self,dist, sigma_shadow_dB=7.0, frek = 6):
         N = self.nodes
         H = np.zeros((N, N))
 
