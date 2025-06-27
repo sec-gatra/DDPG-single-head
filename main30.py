@@ -307,6 +307,8 @@ def main():
 
         # Tambahan: panah horizontal untuk selisih di CDF = 0.5
         cdf_level = 0.5
+        print(f'x rate = {x_rate}')
+        print(f'rate success={RATE_SUCCESS}')
         print(f'x rand = {x_rand}')
         print(f'y_rand={y_rand}')
         print(f'x_ddpg={x_ddpg}')
