@@ -293,6 +293,8 @@ def main():
                 s = s_next
                 channel_gain=next_channel_gain
 
+        print(total_steps, opt.Max_train_steps)
+
         x_ddpg, y_ddpg = compute_cdf(EE_DDPG)
         x_rand, y_rand = compute_cdf(EE_RAND)
         x_rate, y_rate = compute_cdf(RATE_SUCCESS)
