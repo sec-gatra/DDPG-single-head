@@ -307,6 +307,12 @@ def main():
 
         # Tambahan: panah horizontal untuk selisih di CDF = 0.5
         cdf_level = 0.5
+        print(f'x rand = {x_rand}')
+        print(f'y_rand={y_rand}')
+        print(f'x_ddpg={x_ddpg}')
+        print(f'y ddpg={y_ddpg}')
+        print(f'EE ddpg = {EE_DDPG}')
+        print(f'ee rand={EE_RAND}')
         x1 = np.interp(cdf_level, y_ddpg, x_ddpg)
         x2 = np.interp(cdf_level, y_rand, x_rand)
         gap_percent = 100 * (x1 - x2) / x2
